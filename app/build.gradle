@@ -55,13 +55,13 @@ android {
         prod {
             signingConfig signingConfigs.production
             buildConfigField 'String', 'BASE_URL', '"https://iquotes-node.herokuapp.com/"'
-            buildConfigField 'String', 'APPCENTER_SECRET', '"a51369ca-7d96-4973-86b3-838f69abd32b"'
+            buildConfigField 'String', 'APPCENTER_SECRET', '"303b698b-9e5f-4283-8f11-7a9c981cadb4"'
         }
         dev {
             applicationId 'com.example.flippingtool.dev'
             testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
             buildConfigField 'String', 'BASE_URL', '"https://iquotes-node-dev.herokuapp.com/"'
-            buildConfigField 'String', 'APPCENTER_SECRET', '"a51369ca-7d96-4973-86b3-838f69abd32b"'
+            buildConfigField 'String', 'APPCENTER_SECRET', '"303b698b-9e5f-4283-8f11-7a9c981cadb4"'
         }
     }
     compileOptions {
