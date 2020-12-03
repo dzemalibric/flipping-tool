@@ -7,7 +7,20 @@ plugins {
 
 android {
     compileSdkVersion 29
-
+    signingConfigs {
+        production {
+            keyAlias 'flipping'
+            keyPassword 'flipping'
+            storeFile file('../keystore/prod-keystore.jks')
+            storePassword 'flipping'
+        }
+        debug {
+            keyAlias 'flipping'
+            keyPassword 'flipping'
+            storeFile file('../keystore/debug.keystore')
+            storePassword 'flipping'
+        }
+    }
     defaultConfig {
         applicationId "com.example.flippingtool"
         minSdkVersion 21
@@ -21,7 +34,30 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.production
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+    }
+    flavorDimensions "default"
+
+    productFlavors {
+        prod {
+            signingConfig signingConfigs.production
+            buildConfigField 'String', 'BASE_URL', '"https://iquotes-node.herokuapp.com/"'
+            buildConfigField 'String', 'APPCENTER_SECRET', '"a51369ca-7d96-4973-86b3-838f69abd32b"'
+        }
+        dev {
+            applicationId 'com.example.flippingtool.dev'
+            testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+            buildConfigField 'String', 'BASE_URL', '"https://iquotes-node-dev.herokuapp.com/"'
+            buildConfigField 'String', 'APPCENTER_SECRET', '"9e4240c8-4652-4d38-8259-5dce43e17c32"'
         }
     }
     compileOptions {

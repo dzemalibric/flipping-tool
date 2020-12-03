@@ -15,7 +15,7 @@ import com.microsoft.appcenter.distribute.Distribute
 class FlippingToolApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        AppCenter.start(this, "cca1508a-6f71-44a0-83c2-61c2a556d705",
+        AppCenter.start(this, BuildConfig.APPCENTER_SECRET,
                 Analytics::class.java, Crashes::class.java, Distribute::class.java)
     }
 }
