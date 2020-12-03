@@ -61,7 +61,7 @@ android {
             applicationId 'com.example.flippingtool.dev'
             testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
             buildConfigField 'String', 'BASE_URL', '"https://iquotes-node-dev.herokuapp.com/"'
-            buildConfigField 'String', 'APPCENTER_SECRET', '"9e4240c8-4652-4d38-8259-5dce43e17c32"'
+            buildConfigField 'String', 'APPCENTER_SECRET', '"a51369ca-7d96-4973-86b3-838f69abd32b"'
         }
     }
     compileOptions {
