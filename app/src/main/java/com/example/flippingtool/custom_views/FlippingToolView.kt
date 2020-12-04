@@ -6,6 +6,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.flippingtool.R
+import com.example.flippingtool.ScreenManager
+import com.example.flippingtool.images.Image
+import com.example.flippingtool.images.ImageQuality
+import com.example.flippingtool.images.ImagesGenerator
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_image.view.*
 import java.net.URL
@@ -18,9 +22,9 @@ import java.net.URL
  **/
 
 class FlippingToolView : LinearLayout {
-    lateinit var mUrl : String
-    constructor(context: Context?, url: String) : super(context) {
-        mUrl = url
+    lateinit var image : Image
+    constructor(context: Context?, image: Image) : super(context) {
+        this.image = image
         init()
     }
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
@@ -36,6 +40,40 @@ class FlippingToolView : LinearLayout {
 
     private fun init() {
         inflate(context, R.layout.item_image, this)
-        Picasso.get().load(mUrl).into(imageView)
+        loadThumbnail()
+        loadMedium()
+    }
+
+    fun loadThumbnail() {
+        Picasso.get().load(ImagesGenerator.generateImageUrl(image, ImageQuality.THUMBNAIL))
+            .resize(ScreenManager.screenWidth, ScreenManager.screenHeight)
+            .noFade()
+            .noPlaceholder()
+            .into(imageView)
+    }
+
+    fun loadPreview() {
+        Picasso.get().load(ImagesGenerator.generateImageUrl(image, ImageQuality.PREVIEW))
+            .fit()
+            .noFade()
+            .noPlaceholder()
+            .into(imageView)
+    }
+
+    fun loadMedium() {
+        Picasso.get().load(ImagesGenerator.generateImageUrl(image, ImageQuality.MEDIUM))
+            .fit()
+            .centerInside()
+            .noFade()
+            .noPlaceholder()
+            .into(imageView)
+    }
+
+    fun loadHigh() {
+        Picasso.get().load(ImagesGenerator.generateImageUrl(image, ImageQuality.HIGH))
+            .fit()
+            .noFade()
+            .noPlaceholder()
+            .into(imageView)
     }
 }

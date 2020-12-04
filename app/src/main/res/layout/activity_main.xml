@@ -14,25 +14,32 @@
         app:transformation="centerCrop"
         app:transformationGravity="center_horizontal"
         app:alignment="center"
-        app:overScrollHorizontal="true"
-        app:overScrollVertical="true"
-        app:overPinchable="true"
+        app:overScrollHorizontal="false"
+        app:overScrollVertical="false"
+        app:overPinchable="false"
         app:horizontalPanEnabled="true"
-        app:verticalPanEnabled="false"
+        app:verticalPanEnabled="true"
         app:zoomEnabled="true"
-        app:flingEnabled="false"
+        app:flingEnabled="true"
         app:scrollEnabled="true"
         app:oneFingerScrollEnabled="true"
         app:twoFingersScrollEnabled="false"
         app:threeFingersScrollEnabled="false"
         app:minZoom="1"
         app:minZoomType="zoom"
-        app:maxZoom="5"
-        app:maxZoomType="realZoom"
+        app:maxZoom="3"
+        app:maxZoomType="zoom"
         app:animationDuration="280"
         app:hasClickableChildren="false">
 
-            <LinearLayout
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        </ScrollView>
+
+            <com.example.flippingtool.custom_views.FlippingToolLayout
                 android:id="@+id/flipToolLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
