@@ -5,13 +5,16 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.size
 import com.example.flippingtool.R
 import com.example.flippingtool.ScreenManager
 import com.example.flippingtool.images.Image
 import com.example.flippingtool.images.ImageQuality
 import com.example.flippingtool.images.ImagesGenerator
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_image.view.*
+import java.lang.Exception
 import java.net.URL
 
 /**
@@ -23,8 +26,11 @@ import java.net.URL
 
 class FlippingToolView : LinearLayout {
     lateinit var image : Image
-    constructor(context: Context?, image: Image) : super(context) {
+    lateinit var mListener: LoadingListener
+
+    constructor(context: Context?, image: Image, listener: LoadingListener) : super(context) {
         this.image = image
+        mListener = listener
         init()
     }
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
@@ -66,7 +72,15 @@ class FlippingToolView : LinearLayout {
             .centerInside()
             .noFade()
             .noPlaceholder()
-            .into(imageView)
+            .into(imageView, object : Callback {
+                override fun onSuccess() {
+                    mListener.onLoaded()
+                }
+
+                override fun onError(e: Exception?) {
+                }
+
+            })
     }
 
     fun loadHigh() {
@@ -75,5 +89,9 @@ class FlippingToolView : LinearLayout {
             .noFade()
             .noPlaceholder()
             .into(imageView)
+    }
+
+    interface LoadingListener {
+        fun onLoaded()
     }
 }
