@@ -1,53 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <com.otaliastudios.zoom.ZoomLayout
-        android:id="@+id/zoomLayout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:visibility="visible"
-        app:transformation="centerCrop"
-        app:transformationGravity="center_horizontal"
-        app:alignment="center"
-        app:overScrollHorizontal="false"
-        app:overScrollVertical="false"
-        app:overPinchable="false"
-        app:horizontalPanEnabled="true"
-        app:verticalPanEnabled="true"
-        app:zoomEnabled="true"
-        app:flingEnabled="true"
-        app:scrollEnabled="true"
-        app:oneFingerScrollEnabled="true"
-        app:twoFingersScrollEnabled="false"
-        app:threeFingersScrollEnabled="false"
-        app:minZoom="1"
-        app:minZoomType="zoom"
-        app:maxZoom="3"
-        app:maxZoomType="zoom"
-        app:animationDuration="280"
-        app:hasClickableChildren="false">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/thumbnailContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardPreventCornerOverlap="false"
+        app:cardCornerRadius="@dimen/three_percent_margin"
+        app:cardElevation="10dp">
 
-        <HorizontalScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.example.flippingtool.custom_views.FlippingToolLayout
-                android:id="@+id/flipToolLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </HorizontalScrollView>
+        <com.joooonho.SelectableRoundedImageView
+            android:id="@+id/catalogueThumbnail"
+            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:scaleType="centerCrop"
+            app:sriv_left_top_corner_radius="@dimen/three_percent_margin"
+            app:sriv_right_top_corner_radius="@dimen/three_percent_margin"
+            app:sriv_left_bottom_corner_radius="@dimen/three_percent_margin"
+            app:sriv_right_bottom_corner_radius="@dimen/three_percent_margin"
+            app:sriv_oval="false"/>
 
+    </androidx.cardview.widget.CardView>
 
-    </com.otaliastudios.zoom.ZoomLayout>
+    <Button
+        android:id="@+id/reportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/thumbnailContainer"
+        app:layout_constraintStart_toStartOf="@id/thumbnailContainer"
+        app:layout_constraintEnd_toEndOf="@id/thumbnailContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/report"
+        android:textAllCaps="false"/>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

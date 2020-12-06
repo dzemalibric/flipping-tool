@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.otaliastudios.zoom.ZoomLayout
+        android:id="@+id/zoomLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:transformation="centerCrop"
+        app:transformationGravity="left"
+        app:alignment="center"
+        app:overScrollHorizontal="false"
+        app:overScrollVertical="false"
+        app:overPinchable="false"
+        app:horizontalPanEnabled="true"
+        app:verticalPanEnabled="true"
+        app:zoomEnabled="true"
+        app:flingEnabled="false"
+        app:scrollEnabled="true"
+        app:oneFingerScrollEnabled="true"
+        app:twoFingersScrollEnabled="true"
+        app:threeFingersScrollEnabled="false"
+        app:minZoom="1"
+        app:minZoomType="zoom"
+        app:maxZoom="3"
+        app:maxZoomType="zoom"
+        app:animationDuration="280"
+        app:hasClickableChildren="false">
+
+            <com.example.flippingtool.ui.custom_views.FlippingToolLayout
+                android:id="@+id/flipToolLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+    </com.otaliastudios.zoom.ZoomLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_9">9sp</dimen>
+    <dimen name="text_size_8">8sp</dimen>
+    <dimen name="text_size_7">7sp</dimen>
+    <dimen name="text_size_6">6sp</dimen>
+
+    <dimen name="one_percent_margin">3.75dp</dimen>
+    <dimen name="two_percent_margin">7.5dp</dimen>
+    <dimen name="three_percent_margin">11.25dp</dimen>
+    <dimen name="four_percent_margin">15dp</dimen>
+    <dimen name="five_percent_margin">18.75dp</dimen>
+    <dimen name="six_percent_margin">22.5dp</dimen>
+    <dimen name="eight_percent_margin">30dp</dimen>
+    <dimen name="nine_percent_margin">33.75dp</dimen>
+    <dimen name="ten_percent_margin">37.5dp</dimen>
+    <dimen name="eleven_percent_margin">41.25dp</dimen>
+    <dimen name="twelve_percent_margin">45dp</dimen>
+    <dimen name="thirteen_percent_margin">48.75dp</dimen>
+    <dimen name="fourteen_percent_margin">52.5dp</dimen>
+    <dimen name="fifteen_percent_margin">56.25dp</dimen>
+    <dimen name="sixteen_percent_margin">60dp</dimen>
+    <dimen name="seventeen_percent_margin">63.75dp</dimen>
+    <dimen name="eighteen_percent_margin">67.5dp</dimen>
+    <dimen name="nineteen_percent_margin">71.25</dimen>
+    <dimen name="twenty_percent_margin">75dp</dimen>
+
+</resources>
