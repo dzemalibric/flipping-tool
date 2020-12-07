@@ -6,10 +6,7 @@ import com.example.flippingtool.data.images.ImageState
 import com.google.gson.Gson
 
 /**
- *
- *
- *
- * @author Comp at 3.12.2020.
+ * @author Dzemal at 3.12.2020.
  **/
 
 object ImagesGenerator {
@@ -222,11 +219,17 @@ object ImagesGenerator {
             "\t}\n" +
             "}\n"
 
+    /**
+     * Generates all images from [json] provided in "Page"
+     */
     fun generateImages() : LinkedHashMap<String, Image> {
         val imagesResponse = Gson().fromJson(json, ImagesResponse::class.java)
         return imagesResponse.page
     }
 
+    /**
+     * Method used to generate link with provided [quality]
+     */
     fun generateImageUrl(image: Image, quality: ImageState) : String {
         return image.basePath + quality.quality + "/" + image.fileName
     }

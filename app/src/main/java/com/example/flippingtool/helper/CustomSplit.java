@@ -1,9 +1,7 @@
 package com.example.flippingtool.helper;
 import androidx.annotation.RestrictTo;
 /**
- * Notes:
- *
- * @author dzemal.ibric at 30/10/2020
+ * @author Dzemal at 30/10/2020
  */
 public class CustomSplit {
     private long splitTime, lapTime;

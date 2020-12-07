@@ -7,10 +7,7 @@ import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.distribute.Distribute
 
 /**
- *
- *
- *
- * @author Comp at 3.12.2020.
+ * @author Dzemal at 3.12.2020.
  **/
 class FlippingToolApplication : Application() {
     override fun onCreate() {

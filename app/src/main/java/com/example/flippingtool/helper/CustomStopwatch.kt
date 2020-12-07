@@ -8,9 +8,7 @@ import java.text.NumberFormat
 import java.util.*
 
 /**
- * Notes:
- *
- * @author dzemal.ibric at 30/10/2020
+ * @author Dzemal at 30/10/2020
  */
 class CustomStopwatch {
     private val splits: LinkedList<CustomSplit>

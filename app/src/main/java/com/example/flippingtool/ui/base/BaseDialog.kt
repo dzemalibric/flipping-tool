@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.view.Window
 
 /**
- *
- *
- *
- * @author Comp at 6.12.2020.
+ * Base class for dialogs in the app. Simplifies layout inflation
+ * @author Dzemal at 6.12.2020.
  **/
 
 abstract class BaseDialog(mContext: Context?) : Dialog(mContext!!) {
@@ -25,7 +23,15 @@ abstract class BaseDialog(mContext: Context?) : Dialog(mContext!!) {
         setupDialog()
     }
 
+    /**
+     * Override and declare your Layout Resource in inherited class
+     */
     abstract val mLayoutRId : Int
 
+    /**
+     * Optional method for setting up dialog views
+     *
+     * Use this method instead of [onCreate] to setup views inside your layout
+     */
     open fun setupDialog() {}
 }

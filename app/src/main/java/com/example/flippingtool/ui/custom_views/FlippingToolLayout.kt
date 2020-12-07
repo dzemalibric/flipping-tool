@@ -18,10 +18,14 @@ import java.security.InvalidParameterException
 
 
 /**
+ * This custom layout is essential part of the project. Every major logic for scrolling, zooming and
+ * [Image] states is handled here.
+ *
+ * With major help from guys developing it, [ZoomLayout] attaches to [FlippingToolLayout] to give
+ * all important parameters needed to figure out scrolling, zooming and current visible children.
  *
  *
- *
- * @author Comp at 2.12.2020.
+ * @author Dzemal at 2.12.2020.
  **/
 
 class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
@@ -39,12 +43,20 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
             defStyleAttr
     )
 
+    /**
+     * Overridden method to ensure that all the views added in this layout are explicitly of type
+     * [FlippingToolView]. Does not have usage for UX, but gives developer a nudge in right direction.
+     */
     override fun addView(child: View?) {
         if (child !is FlippingToolView)
             throw InvalidParameterException("View in FlippingToolLayout must be of type FlippingToolView")
         super.addView(child)
     }
 
+    /**
+     * Simplify adding of raw images to the layout. Generate list of
+     * [FlippingToolView] using provided data.
+     */
     fun addImages(images: LinkedHashMap<String, Image>) {
         this.images = images
         for ((key, value) in images) {
@@ -52,14 +64,12 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
         }
     }
 
-    private fun getVisibleChildren() : ArrayList<FlippingToolView> {
-        val visibleChildren = ArrayList<FlippingToolView>()
-        for (image in children) {
-            if (isVisible(image)) {
-                visibleChildren.add(image as FlippingToolView)
-            }
-        }
-        return visibleChildren
+    fun getChild(position : Int) : FlippingToolView {
+        return getChildAt(position) as FlippingToolView
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return gestureDetector.onTouchEvent(event)
     }
 
     fun attachToZoomLayout(zoomLayout: ZoomLayout) {
@@ -105,6 +115,33 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
                 }
             }
         }
+    }
+
+    /**
+     * To check if THUMBNAIL images loaded we need to have information about every single one of
+     * those images loading state.
+     *
+     * To not call this method every time image loads, we needed to add simple flag [imagesLoaded]
+     * to know when we are all set.
+     */
+    override fun onImageLoaded(position: String) {
+        if (!imagesLoaded && position.toInt() == images.size) {
+            update(null)
+            imagesLoaded = true
+        }
+    }
+
+    /**
+     * Method returns all children currently visible on the screen
+     */
+    private fun getVisibleChildren() : ArrayList<FlippingToolView> {
+        val visibleChildren = ArrayList<FlippingToolView>()
+        for (image in children) {
+            if (isVisible(image)) {
+                visibleChildren.add(image as FlippingToolView)
+            }
+        }
+        return visibleChildren
     }
 
     /**
@@ -165,14 +202,13 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
         }
     }
 
-    fun getChild(position : Int) : FlippingToolView {
-        return getChildAt(position) as FlippingToolView
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return gestureDetector.onTouchEvent(event)
-    }
-
+    /**
+     * Method checks if [view] is currently visible on the screen. To check this we must have
+     * current [scrollX] value given in [zoomLayout] that we attached to this layout.
+     *
+     * Logic is simple. Generate two rectangles using coordinates for [view] and current visible screen.
+     * Use top, left, bottom and right coordinates to generate rectangles and check if they intersect.
+     */
     private fun isVisible(view: View?): Boolean {
         if (view == null) {
             return false
@@ -191,6 +227,11 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
         return actualPosition.intersect(screen)
     }
 
+    /**
+     * Listener used to implement double tap on this layout. Since [zoomLayout] already has
+     * [GestureDetector] and it is advised not to override it, we implement [GestureListener] in
+     * [FlippingToolLayout] to detect double tap and call [zoomLayout].zoomTo() method
+     */
     internal class GestureListener(val zoomLayout: ZoomLayout) : SimpleOnGestureListener() {
         override fun onDown(e: MotionEvent): Boolean {
             return true
@@ -204,13 +245,6 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
                 zoomLayout.zoomTo(DEFAULT_ZOOM_VALUE, true)
             }
             return true
-        }
-    }
-
-    override fun onImageLoaded(position: String) {
-        if (!imagesLoaded && position.toInt() == images.size) {
-            update(null)
-            imagesLoaded = true
         }
     }
 
