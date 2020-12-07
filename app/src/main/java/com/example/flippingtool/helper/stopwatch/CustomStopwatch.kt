@@ -1,4 +1,4 @@
-package com.example.flippingtool.helper
+package com.example.flippingtool.helper.stopwatch
 
 import android.os.Handler
 import android.util.Log

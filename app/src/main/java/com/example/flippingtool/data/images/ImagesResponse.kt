@@ -1,4 +1,4 @@
-package com.example.flippingtool.data
+package com.example.flippingtool.data.images
 
 import com.example.flippingtool.data.images.Image
 import com.google.gson.annotations.SerializedName

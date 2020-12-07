@@ -1,4 +1,4 @@
-package com.example.flippingtool.ui
+package com.example.flippingtool.ui.dialog
 
 import android.content.Context
 import android.graphics.Matrix
@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.dialog_catalogue.*
  **/
 class CatalogueDialog(mContext: Context?,
                       private val images : LinkedHashMap<String, Image>,
-                      private val dismissListener: OnDismissListener) : BaseDialog(mContext), ZoomEngine.Listener {
+                      private val dismissListener: OnDismissListener
+) : BaseDialog(mContext), ZoomEngine.Listener {
 
     //Data for last user interaction with catalogue
     private var reportData = ArrayList<Report>()

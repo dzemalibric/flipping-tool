@@ -1,6 +1,6 @@
 package com.example.flippingtool.helper
 
-import com.example.flippingtool.data.ImagesResponse
+import com.example.flippingtool.data.images.ImagesResponse
 import com.example.flippingtool.data.images.Image
 import com.example.flippingtool.data.images.ImageState
 import com.google.gson.Gson

@@ -1,4 +1,4 @@
-package com.example.flippingtool.helper
+package com.example.flippingtool.helper.stopwatch
 
 /**
  * @author Dzemal at 30/10/2020

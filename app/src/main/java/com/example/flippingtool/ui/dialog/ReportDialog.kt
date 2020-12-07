@@ -1,4 +1,4 @@
-package com.example.flippingtool.ui
+package com.example.flippingtool.ui.dialog
 
 import android.content.Context
 import com.example.flippingtool.R

@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import com.example.flippingtool.R
 import com.example.flippingtool.data.images.Image
 import com.example.flippingtool.data.images.ImageState
-import com.example.flippingtool.helper.CustomStopwatch
+import com.example.flippingtool.helper.stopwatch.CustomStopwatch
 import com.example.flippingtool.helper.ImagesGenerator
 import com.example.flippingtool.helper.ScreenManager
 import com.squareup.picasso.Callback

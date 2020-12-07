@@ -9,6 +9,8 @@ import com.example.flippingtool.helper.ScreenManager
 import com.example.flippingtool.data.images.ImageState
 import com.example.flippingtool.data.report.Report
 import com.example.flippingtool.helper.ImagesGenerator
+import com.example.flippingtool.ui.dialog.CatalogueDialog
+import com.example.flippingtool.ui.dialog.ReportDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
