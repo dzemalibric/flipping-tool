@@ -217,7 +217,7 @@ class CustomStopwatch {
         lapTime = 0
         if (logEnabled) Log.d(
             "STOPWATCH",
-            "split at " + split.getSplitTime().toString() + ". Lap = " + split.getLapTime()
+            "split at " + split.splitTime.toString() + ". Lap = " + split.lapTime
         )
         splits.add(split)
     }
