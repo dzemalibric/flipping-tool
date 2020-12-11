@@ -22,12 +22,13 @@ import kotlinx.android.synthetic.main.item_image.view.*
 
 class FlippingToolView : LinearLayout {
 
-    lateinit var mImage : Image
-    lateinit var mPosition : String
-    lateinit var mListener : ImageLoadingListener
+    lateinit var mImage: Image
+    lateinit var mPosition: String
+    lateinit var mListener: ImageLoadingListener
 
     //Stopwatch counts time user spent on this image
-    private var mStopwatch : CustomStopwatch? = null
+    private var mStopwatch: CustomStopwatch? = null
+
     //Variable to keep track if user was watching this image zoomed
     private var wasZoomed = false
 
@@ -38,9 +39,11 @@ class FlippingToolView : LinearLayout {
         mListener = listener
         init()
     }
+
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         init()
     }
+
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr) {
         init()
@@ -64,18 +67,18 @@ class FlippingToolView : LinearLayout {
      */
     fun loadThumbnailState() {
         Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, ImageState.THUMBNAIL))
-            .noFade()
-            .memoryPolicy(MemoryPolicy.NO_CACHE)
-            .into(imageView, object : Callback {
-                override fun onSuccess() {
-                    mListener.onImageLoaded(mPosition)
-                }
+                .noFade()
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(imageView, object : Callback {
+                    override fun onSuccess() {
+                        mListener.onImageLoaded(mPosition)
+                    }
 
-                override fun onError(e: Exception?) {
+                    override fun onError(e: Exception?) {
 
-                }
+                    }
 
-            })
+                })
     }
 
     /**
@@ -99,7 +102,7 @@ class FlippingToolView : LinearLayout {
      * Get exact time in seconds this view has been visible on the screen while
      * it was attached to the layout.
      */
-    fun getTimeSpent() : Long {
+    fun getTimeSpent(): Long {
         val elapsedTime = mStopwatch?.elapsedTime
         return elapsedTime?.div(1000) ?: 0
     }
@@ -108,61 +111,57 @@ class FlippingToolView : LinearLayout {
      * Returns the flag [wasZoomed] that indicates if this view has loaded [ImageState.HIGH] or
      * [ImageState.ULTRA] state of the image. Alternatively, this means view was in zoom state.
      */
-    fun wasZoomed() : Boolean {
+    fun wasZoomed(): Boolean {
         return wasZoomed
     }
 
     /**
-     * Load second state or [ImageState.PREVIEW] state of the image. Using noFade() and noPlaceholder()
-     * because loading of this view is not visible to the user and to not waste memory
+     * Load second state or [ImageState.PREVIEW] state of the image.
      */
     fun loadPreviewState() {
-        Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, ImageState.PREVIEW))
-            .noFade()
-            .noPlaceholder()
-            .into(imageView)
+        loadImage(ImageState.PREVIEW)
     }
 
     /**
-     * Load third state or [ImageState.MEDIUM] state of the image. Using noFade() and noPlaceholder()
-     * because loading of this view is not visible to the user and to not waste memory.
+     * Load third state or [ImageState.MEDIUM] state of the image.
      *
      * This is default state that all visible items load.
      */
     fun loadMediumState() {
-        Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, ImageState.MEDIUM))
-            .noFade()
-            .noPlaceholder()
-            .into(imageView)
+        loadImage(ImageState.MEDIUM)
     }
 
     /**
-     * Load high res image or [ImageState.HIGH] state of the image. Using noFade() and noPlaceholder()
-     * because loading of this view is not visible to the user and to not waste memory
+     * Load high res image or [ImageState.HIGH] state of the image.
      *
      * This state will only be loaded if the image is currently being zoomed to certain value defined
      * in [FlippingToolLayout]
      */
     fun loadHighState() {
         wasZoomed = true
-        Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, ImageState.HIGH))
-            .noFade()
-            .noPlaceholder()
-            .into(imageView)
+        loadImage(ImageState.HIGH)
     }
+
     /**
-     * Load ultra res image or [ImageState.ULTRA] state of the image. Using noFade() and noPlaceholder()
-     * because loading of this view is not visible to the user and to not waste memory
+     * Load ultra res image or [ImageState.ULTRA] state of the image.
      *
      * This state will only be loaded if the image is currently being zoomed to certain value defined
      * in [FlippingToolLayout]
      */
     fun loadUltraState() {
         wasZoomed = true
-        Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, ImageState.ULTRA))
-            .noFade()
-            .noPlaceholder()
-            .into(imageView)
+        loadImage(ImageState.ULTRA)
+    }
+
+    /**
+     * Using Picasso to load image with noFade() and noPlaceholder() because image that is loading
+     * will not be visible to the user, and these methods are just wasting memory.
+     */
+    private fun loadImage(imageState: ImageState) {
+        Picasso.get().load(ImagesGenerator.generateImageUrl(mImage, imageState))
+                .noFade()
+                .noPlaceholder()
+                .into(imageView)
     }
 
     /**

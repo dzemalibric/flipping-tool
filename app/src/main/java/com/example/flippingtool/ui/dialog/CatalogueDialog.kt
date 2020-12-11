@@ -14,9 +14,8 @@ import kotlinx.android.synthetic.main.dialog_catalogue.*
  * @author Dzemal at 6.12.2020.
  **/
 class CatalogueDialog(mContext: Context?,
-                      private val images : LinkedHashMap<String, Image>,
-                      private val dismissListener: OnDismissListener
-) : BaseDialog(mContext), ZoomEngine.Listener {
+                      private val images: LinkedHashMap<String, Image>,
+                      private val dismissListener: OnDismissListener) : BaseDialog(mContext), ZoomEngine.Listener {
 
     //Data for last user interaction with catalogue
     private var reportData = ArrayList<Report>()

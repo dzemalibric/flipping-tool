@@ -26,7 +26,7 @@ abstract class BaseDialog(mContext: Context?) : Dialog(mContext!!) {
     /**
      * Override and declare your Layout Resource in inherited class
      */
-    abstract val mLayoutRId : Int
+    abstract val mLayoutRId: Int
 
     /**
      * Optional method for setting up dialog views

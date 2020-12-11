@@ -222,7 +222,7 @@ object ImagesGenerator {
     /**
      * Generates all images from [json] provided in "Page"
      */
-    fun generateImages() : LinkedHashMap<String, Image> {
+    fun generateImages(): LinkedHashMap<String, Image> {
         val imagesResponse = Gson().fromJson(json, ImagesResponse::class.java)
         return imagesResponse.page
     }
@@ -230,7 +230,7 @@ object ImagesGenerator {
     /**
      * Method used to generate link with provided [quality]
      */
-    fun generateImageUrl(image: Image, quality: ImageState) : String {
+    fun generateImageUrl(image: Image, quality: ImageState): String {
         return image.basePath + quality.quality + "/" + image.fileName
     }
 }

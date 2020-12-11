@@ -5,6 +5,6 @@ package com.example.flippingtool.data.report
  * @author Dzemal at 6.12.2020.
  **/
 
-data class Report(val id : String,
-                  val timeSpent : Long,
-                  val zoomed : Boolean)
+data class Report(val id: String,
+                  val timeSpent: Long,
+                  val zoomed: Boolean)

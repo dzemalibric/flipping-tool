@@ -30,8 +30,8 @@ import java.security.InvalidParameterException
 
 class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
 
-    lateinit var zoomLayout : ZoomLayout
-    lateinit var images : LinkedHashMap<String, Image>
+    lateinit var zoomLayout: ZoomLayout
+    lateinit var images: LinkedHashMap<String, Image>
     private var imagesLoaded = false
     private lateinit var gestureDetector: GestureDetector
 
@@ -64,7 +64,7 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
         }
     }
 
-    fun getChild(position : Int) : FlippingToolView {
+    fun getChild(position: Int): FlippingToolView {
         return getChildAt(position) as FlippingToolView
     }
 
@@ -134,7 +134,7 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
     /**
      * Method returns all children currently visible on the screen
      */
-    private fun getVisibleChildren() : ArrayList<FlippingToolView> {
+    private fun getVisibleChildren(): ArrayList<FlippingToolView> {
         val visibleChildren = ArrayList<FlippingToolView>()
         for (image in children) {
             if (isVisible(image)) {
@@ -152,8 +152,8 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
      *
      * We need this method so we know when to load PREVIEW state of the image
      */
-    private fun withinPreviewRange(flipToolView : FlippingToolView,
-                                   visibleChildren : ArrayList<FlippingToolView>) : Boolean {
+    private fun withinPreviewRange(flipToolView: FlippingToolView,
+                                   visibleChildren: ArrayList<FlippingToolView>): Boolean {
         return try {
             val firstVisibleChild = getVisibleChildren()[0]
             val lastVisibleChild = getVisibleChildren()[visibleChildren.size - 1]
@@ -162,7 +162,7 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
             val lastVisibleChildPosition = lastVisibleChild.mPosition.toInt()
             (itemPosition < PREVIEW_RANGE + lastVisibleChildPosition
                     && itemPosition > firstVisibleChildPosition - PREVIEW_RANGE)
-        } catch (e : IndexOutOfBoundsException) {
+        } catch (e: IndexOutOfBoundsException) {
             false
         }
     }
@@ -172,14 +172,14 @@ class FlippingToolLayout : LinearLayout, FlippingToolView.ImageLoadingListener {
      *
      * We need this method so we know when to load MEDIUM state of not currently visible image
      */
-    private fun nextToVisibleItem(flipToolView : FlippingToolView,
-                                  visibleChildren : ArrayList<FlippingToolView>) : Boolean {
+    private fun nextToVisibleItem(flipToolView: FlippingToolView,
+                                  visibleChildren: ArrayList<FlippingToolView>): Boolean {
         return try {
             val firstVisibleChild = getVisibleChildren()[0]
             val lastVisibleChild = getVisibleChildren()[visibleChildren.size - 1]
             firstVisibleChild.mPosition.toInt() - flipToolView.mPosition.toInt() == 1 ||
                     flipToolView.mPosition.toInt() - lastVisibleChild.mPosition.toInt() == 1
-        } catch (e : IndexOutOfBoundsException) {
+        } catch (e: IndexOutOfBoundsException) {
             false
         }
     }

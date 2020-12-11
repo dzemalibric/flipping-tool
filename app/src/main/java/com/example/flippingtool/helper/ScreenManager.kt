@@ -8,6 +8,6 @@ package com.example.flippingtool.helper
  **/
 
 object ScreenManager {
-    var screenHeight : Int = 0
-    var screenWidth : Int = 0
+    var screenHeight: Int = 0
+    var screenWidth: Int = 0
 }

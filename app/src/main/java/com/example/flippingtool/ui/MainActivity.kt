@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), CatalogueDialog.OnDismissListener {
 
     //Images provided in json
     private val images = ImagesGenerator.generateImages()
+
     //Data to show after user interaction
     private var reportData = ArrayList<Report>()
 
@@ -41,8 +42,8 @@ class MainActivity : AppCompatActivity(), CatalogueDialog.OnDismissListener {
      */
     private fun loadThumbnail() {
         Picasso.get()
-            .load(ImagesGenerator.generateImageUrl(images["1"]!!, ImageState.PREVIEW))
-            .into(catalogueThumbnail)
+                .load(ImagesGenerator.generateImageUrl(images["1"]!!, ImageState.PREVIEW))
+                .into(catalogueThumbnail)
     }
 
     /**
@@ -57,10 +58,10 @@ class MainActivity : AppCompatActivity(), CatalogueDialog.OnDismissListener {
                 ReportDialog(this, reportData).show()
             } else {
                 Toast.makeText(
-                    this,
-                    "Please open catalogue to show user data",
-                    Toast.LENGTH_LONG)
-                    .show()
+                        this,
+                        "Please open catalogue to show user data",
+                        Toast.LENGTH_LONG)
+                        .show()
             }
         }
     }

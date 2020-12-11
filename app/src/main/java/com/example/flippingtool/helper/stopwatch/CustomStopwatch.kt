@@ -77,49 +77,6 @@ class CustomStopwatch {
      */
     private val runnable = Runnable { this.run() }
 
-    /**
-     * Get a list of all splits that have been created.
-     *
-     * @return all splits created with split method.
-     * @see CustomSplit
-     *
-     * @since 1.0
-     */
-    fun getSplits(): LinkedList<CustomSplit> {
-        return splits
-    }
-
-    /**
-     * Set whether to print debug logs or not. If enabled, it will log each time the time is updated.
-     *
-     * @param debugMode desired debugging status
-     * @since 1.0
-     */
-    fun setDebugMode(debugMode: Boolean) {
-        logEnabled = debugMode
-    }
-
-    /**
-     * Allows you to set a textView where the stopwatch time is displayed.
-     * If not provided, or set to null, you need to manually display the time.
-     *
-     * @param textView the textView where you want to display the stopwatch time. Can be null.
-     * @since 1.0
-     */
-    fun setTextView(textView: TextView?) {
-        this.textView = textView
-    }
-
-    /**
-     * Set an OnTickListener to listen for clock changes.
-     *
-     * @param onTickListener a reference to the interface implementation.
-     * @since 1.0
-     */
-    fun setOnTickListener(onTickListener: OnTickListener?) {
-        this.onTickListener = onTickListener
-    }
-
     fun start() {
         if (!isStarted) {
             isStarted = true
@@ -130,44 +87,6 @@ class CustomStopwatch {
             elapsedTime = 0
             splits.clear()
             handler.post(runnable)
-        }
-    }
-
-    /**
-     * Starts the stopwatch at the current time. Cannot be called again without calling stop() first.
-     *
-     * @throws IllegalStateException if the stopwatch has already been started.
-     * @see .stop
-     * @see .isStarted
-     * @since 1.0
-     */
-    fun start(elapsedTime: Long) {
-        if (!isStarted) {
-            isStarted = true
-            isPaused = false
-            start = System.currentTimeMillis()
-            current = System.currentTimeMillis()
-            lapTime = 0
-            this.elapsedTime = elapsedTime
-            splits.clear()
-            handler.post(runnable)
-        }
-    }
-
-    /**
-     * Stops the stopwatch. Stopwatch cannot be resumed from current time later.
-     *
-     * @throws IllegalStateException if stopwatch has not been started yet.
-     * @see .start
-     * @see .isStarted
-     * @since 1.0
-     */
-    fun stop() {
-        if (isStarted) {
-            updateElapsed(System.currentTimeMillis())
-            isStarted = false
-            isPaused = false
-            handler.removeCallbacks(runnable)
         }
     }
 
@@ -205,24 +124,6 @@ class CustomStopwatch {
     }
 
     /**
-     * Creates a new split/lap at the current time. Can even be called when stopwatch is paused.
-     *
-     * @throws IllegalStateException if stopwatch is not started yet
-     * @see .getSplits
-     * @since 1.0
-     */
-    fun split() {
-        check(isStarted) { "Not Started" }
-        val split = CustomSplit(elapsedTime, lapTime)
-        lapTime = 0
-        if (logEnabled) Log.d(
-            "STOPWATCH",
-            "split at " + split.splitTime.toString() + ". Lap = " + split.lapTime
-        )
-        splits.add(split)
-    }
-
-    /**
      * Updates the time in elapsed and lap time and then updates the current time.
      *
      * @param time Current time in millis. Passing any other value may result in odd behaviour
@@ -247,8 +148,8 @@ class CustomStopwatch {
         updateElapsed(System.currentTimeMillis())
         handler.postDelayed(runnable, clockDelay)
         if (logEnabled) Log.d(
-            "STOPWATCH",
-            (elapsedTime / 1000).toString() + " seconds, " + elapsedTime % 1000 + " milliseconds"
+                "STOPWATCH",
+                (elapsedTime / 1000).toString() + " seconds, " + elapsedTime % 1000 + " milliseconds"
         )
         if (onTickListener != null) onTickListener!!.onTick(this)
         if (textView != null) {
@@ -289,8 +190,8 @@ class CustomStopwatch {
             val hours = (elapsedTime / (60 * 60 * 1000)).toInt()
             val f: NumberFormat = DecimalFormat("00")
             if (hours == 0) displayTime.append(f.format(minutes.toLong())).append(":")
-                .append(f.format(seconds.toLong())) else displayTime.append(hours).append(":")
-                .append(f.format(minutes.toLong())).append(":").append(f.format(seconds.toLong()))
+                    .append(f.format(seconds.toLong())) else displayTime.append(hours).append(":")
+                    .append(f.format(minutes.toLong())).append(":").append(f.format(seconds.toLong()))
             return displayTime.toString()
         }
     }
